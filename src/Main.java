@@ -1,8 +1,10 @@
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
+        Locale.setDefault(Locale.ROOT);
         Scanner scan = new Scanner(System.in);
         System.out.print("Введите скорость скорость лодки в стоячей воде (км/ч) v = ");
         double v = scan.nextDouble();
