@@ -5,16 +5,43 @@ public class Main {
 
     public static void main(String[] args) {
         Locale.setDefault(Locale.ROOT);
-        Scanner scan = new Scanner(System.in);
-        System.out.print("Введите скорость скорость лодки в стоячей воде (км/ч) v = ");
-        double v = scan.nextDouble();
-        System.out.print("Введите скорость течения (км/ч) u = ");
-        double u = scan.nextDouble();
-        System.out.print("Время движения без течения (ч) t1 = ");
-        double t1 = scan.nextDouble();
-        System.out.print("Время движения с течением (ч) t2 = ");
-        double t2 = scan.nextDouble();
-        double s = (t1 * v) + (t2 * (v - u));
-        System.out.println("s = "+ s);
+
+        double v = readNumber("Введите скорость лодки в км/ч = ");
+        checkNum(v);
+        double u = readNumber("Введите скорость течения в км/ч = ");
+        checkNum(u);
+        checkSpeed(v,u);
+        double t1 = readNumber("Время движения лодки в озере в ч = ");
+        checkNum(t1);
+        double t2 = readNumber("Время движения лодки против течения в ч = ");
+        checkNum(t2);
+
+        double s = findDistance(v, u, t1, t2);
+
+        System.out.printf("S = %1$.03f", s);
+    }
+
+    static double readNumber(String text) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print(text);
+        return scanner.nextDouble();
+    }
+
+    static double findDistance(double v, double u, double t1, double t2) {
+        return (t1 * v) + (t2 * (v - u));
+    }
+
+    static void checkNum(double num) {
+        if (num < 0) {
+            System.out.print("Ошибка, введите число > 0");
+            System.exit(0);
+        }
+    }
+
+    static void checkSpeed(double num1, double num2) {
+        if (num2 > num1) {
+            System.out.print("Ошибка, скорость течения должна быть меньше скорости лодки");
+            System.exit(0);
+        }
     }
 }
